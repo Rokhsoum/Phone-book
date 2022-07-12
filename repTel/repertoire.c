@@ -11,8 +11,8 @@
 #include "repertoire.h"
 
 
-void afficherRepertoire(struct Repertoire r) {
-    /**
+void afficherRepertoire(struct Repertoire *r) {
+/**
     FILE* repTel = NULL;
     char contacts[TAILLE_MAX] = "";
     
@@ -29,12 +29,12 @@ void afficherRepertoire(struct Repertoire r) {
     }
     
     fclose(repTel);
-    */
-    
+*/
+
     int i;
-    for (i = 0; i < r.nbrCts; i++) {
+    for (i = 0; i < r->nbrCts; i++) {
         printf("Voici les contacts de votre repertoire telephonique:\n");
-        printf("%s %s: %s\n", r.c[i].firstName, r.c[i].lastName, r.c[i].phone);
+        printf("%s %s: %s\n", r->c[i].firstName, r->c[i].lastName, r->c[i].phone);
     }
 }
 
@@ -60,11 +60,12 @@ void ajouterContact(struct Repertoire *r, struct Contact c) {
         printf("Entrez son numero de telephone: ");
         scanf("%s", &c.phone);
 
+        fseek(repTel, 0, SEEK_END);
         fprintf(repTel, "%s %s %s", c.firstName, c.lastName, c.phone);
 
         r->nbrCts++;
 
-        printf("Le contact %s %s a ete ajoute avec succes dans votre repertoir.", c.firstName, c.lastName);
+        printf("Le contact %s %s a ete ajoute avec succes dans votre repertoire.", c.firstName, c.lastName);
     }
     else {
         printf("Impossible d'ajouter ce contact dans ce repertoire telephonique.");
@@ -120,5 +121,31 @@ int getIndice(struct Repertoire r, struct Contact c)  {
 }
 
 void supprimerContact(struct Repertoire *r, struct Contact c) {
+    
+    FILE* repTel = NULL;
+    
+    repTel = fopen("repTel.txt", "a+");
+    
+    if(repTel != NULL) {
+        
+        printf("Entrez le prenom et le nom du contact que vous voulez supprimer :\n ");
+        scanf("%s", &r->c.firstName);
+        scanf("%s", &r->c.lastName);
+    
+        printf("Le contact: %s %s a ete supprime de votre repertoire.", c->firstName, c->lastName);
+    
+    }
+    else {
+        
+    }
+    
+    fclose(repTel);
+}
+
+
+void fusionnerRepertoire(struct Repertoire r1, struct Repertoire r2) {
+    
+    FILE *r1, *r2, *r3;
+    
     
 }

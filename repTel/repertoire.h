@@ -18,13 +18,17 @@
 #define false       0
 #define true        1
 
+#define SEEK_SET
+#define SEEK_CUR
+#define SEEK_END
+
 struct Repertoire {
     int nbrCts;
     struct Contact *c;
 };
 
 
-void afficherRepertoire(struct Repertoire r);
+void afficherRepertoire(struct Repertoire *r);
 
 void afficherNbrCts(struct Repertoire r);
 
@@ -37,9 +41,9 @@ bool rechercher(struct Repertoire r, char *nom);
 int getIndice(struct Repertoire r, struct Contact c);
 
 void supprimerContact(struct Repertoire *r, struct Contact c);
-/***
+
 void fusionnerRepertoire(struct Repertoire r1, struct Repertoire r2);
-*/
+
 
 
 

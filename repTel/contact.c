@@ -14,7 +14,7 @@ void afficherContact(struct Contact c) {
     printf("Le prenom de ce contact est: %s\n", c.firstName);
     printf("Le nom de ce contact est: %s\n", c.lastName);
     printf("Le numero de telephone de ce contact est: %s\n", c.phone);
-
+    
 }
 
 /**
