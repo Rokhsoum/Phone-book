@@ -194,50 +194,36 @@ void supprimerContact(struct Repertoire *r, struct Contact c1) {
     rename("repTel", "repTel_temp");
     
     printf("Le contact %s %s a été suprimmé avec succes\n", c1.firstName, c1.lastName);
-    
-    /**
-    c = getc(repTel);
-    
-    if(repTel != NULL) {
-        while (c != EOF) {
-            printf("%c", c);
-            c = getc(repTel);
-        }
-        
-        rewind(repTel);
-        
-        printf("Vueillez entrer l indice du contact que vous voulez supprimer:\n");
-        scanf("%d", &c1.indice);
-        c1.indice = c1.indice + 1;
-        
-        repTel_temp = fopen("repTel_temp", "w");
-        
-        if (repTel_temp != NULL) {
-            c = getc(repTel);
-            while (c != EOF) {
-                c = getc(repTel);
-                if (c == '\n') {
-                    r->nbrCts++;
-                    if (r->nbrCts != c1.indice) {
-                        putc(c, repTel_temp);
-                    }
-                }
-            }
-        }
-        
-        fclose(repTel);
-        fclose(repTel_temp);
-        
-        remove(repTel);
-        rename(repTel, repTel_temp);
-    }
-    */
 }
 
 
-void fusionnerRepertoire(struct Repertoire r1, struct Repertoire r2) {
+void fusionnerRepertoire(struct Repertoire r4, struct Repertoire r5) {
     
-    //FILE *r1, *r2, *r3;
+    FILE *r1, *r2, *r3;
+    char c;
     
+    r1 = fopen("repertoire1", "r");
+    r2 = fopen("repertoire2", "r");
     
+    if (r1 == NULL || r2 == NULL) {
+        printf("Impossible d ouvrir ces deux fichiers \n");
+    }
+    
+    r3 = fopen("repertoire3", "w");
+    if (r3 != NULL) {
+        while ((c = fgetc(r1)) != EOF) {
+            fputc(c, r3);
+        }
+        
+        while ((c = fgetc(r2)) != EOF) {
+            fputc(c, r3);
+        }
+    }
+    
+    fclose(r1);
+    fclose(r2);
+    fclose(r3);
+    
+    remove("repertoire1");
+    remove("repertoire2");
 }
